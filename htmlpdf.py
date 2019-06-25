@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 
-import json
 import re
 import os.path
 import logging
 from xml.etree import ElementTree
 from typing import Mapping
+import yaml
 import jinja2
 import weasyprint
 from cssselect2 import ElementWrapper
@@ -17,7 +17,7 @@ def create_pdf(html: str, base_url: str, output_filename: str) -> None:
     document.write_pdf(target=output_filename, font_config=font_config)
 
 def render_html(data_filename: str, html_template_filename: str) -> str:
-    data = json.load(open(data_filename, "r"))
+    data = yaml.safe_load(open(data_filename, "r"))
     html_template = open(html_template_filename, "r").read()
     return jinja2.Template(html_template).render(data)
 
@@ -44,7 +44,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "-i", dest="data_filename", required=True,
-        help="data filename"
+        help="YAML data filename"
     )
     parser.add_argument(
         "-t", dest="html_template_filename", required=True,
