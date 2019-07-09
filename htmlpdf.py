@@ -4,6 +4,7 @@ import re
 import collections.abc
 import os.path
 import logging
+import numbers
 from xml.etree import ElementTree
 from typing import Mapping, Iterable, Callable, Union
 import yaml
@@ -12,7 +13,8 @@ import weasyprint
 from cssselect2 import ElementWrapper
 from unidecode import unidecode
 
-Node = Union[Mapping, Iterable, str]
+Leaf = Union[str, numbers.Real]
+Node = Union[Mapping, Iterable, Leaf]
 
 def create_pdf(html: str, base_url: str, output_filename: str) -> None:
     font_config = weasyprint.fonts.FontConfiguration()
@@ -24,7 +26,9 @@ def render_html(data_filename: str, html_template_filename: str) -> str:
     html_template = open(html_template_filename, "r").read()
     return jinja2.Template(html_template).render(data)
 
-def process_tags(inp: str) -> str:
+def process_tags(inp: Leaf) -> Leaf:
+    if isinstance(inp, numbers.Real):
+        return inp
     tags = [
         (r"__([^_]+)__", r"<strong>\1</strong>"),
         (r"_([^_]+)_", r"<em>\1</em>"),
@@ -33,8 +37,10 @@ def process_tags(inp: str) -> str:
         inp = re.sub(pattern, replacement, inp)
     return inp
 
-def recursive_map(node: Node, func: Callable[[str], str]) -> Node:
+def recursive_map(node: Node, func: Callable[[Leaf], Leaf]) -> Node:
     if isinstance(node, str):
+        return func(node)
+    if isinstance(node, numbers.Real):
         return func(node)
     if isinstance(node, collections.abc.Mapping):
         return {k: recursive_map(v, func) for k, v in node.items()}
