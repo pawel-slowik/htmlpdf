@@ -21,8 +21,11 @@ def create_pdf(html: str, base_url: str, output_filename: str) -> None:
     document = weasyprint.HTML(string=html, base_url=base_url)
     document.write_pdf(target=output_filename, font_config=font_config)
 
-def render_html(data_filename: str, html_template_filename: str) -> str:
-    data = recursive_map(yaml.safe_load(open(data_filename, "r")), process_tags)
+def render_html(data_filenames: Iterable[str], html_template_filename: str) -> str:
+    data = recursive_map(
+        yaml.safe_load("\n".join(open(df, "r").read() for df in data_filenames)),
+        process_tags
+    )
     html_template = open(html_template_filename, "r").read()
     return jinja2.Template(html_template).render(data)
 
@@ -70,8 +73,8 @@ def main() -> None:
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "-i", dest="data_filename", required=True,
-        help="YAML data filename"
+        "-i", action="append", dest="data_filenames", required=True,
+        help="YAML data filename (repeat to load multiple files)", metavar="DATA_FILENAME",
     )
     parser.add_argument(
         "-t", dest="html_template_filename", required=True,
@@ -83,7 +86,7 @@ def main() -> None:
     )
     args = parser.parse_args()
     enable_weasyprint_logging()
-    html = render_html(args.data_filename, args.html_template_filename)
+    html = render_html(args.data_filenames, args.html_template_filename)
     output_filename = (
         args.output_filename
         if args.output_filename
