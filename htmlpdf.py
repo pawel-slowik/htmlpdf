@@ -13,7 +13,7 @@ import weasyprint
 from cssselect2 import ElementWrapper
 from unidecode import unidecode
 
-Leaf = Union[str, numbers.Real]
+Leaf = Union[str, numbers.Real, None]
 Node = Union[Mapping, Iterable, Leaf]
 
 def create_pdf(html: str, base_url: str, output_filename: str) -> None:
@@ -32,6 +32,8 @@ def render_html(data_filenames: Iterable[str], html_template_filename: str) -> s
 def process_tags(inp: Leaf) -> Leaf:
     if isinstance(inp, numbers.Real):
         return inp
+    if inp is None:
+        return inp
     tags = [
         (r"__([^_]+)__", r"<strong>\1</strong>"),
         (r"_([^_]+)_", r"<em>\1</em>"),
@@ -44,6 +46,8 @@ def recursive_map(node: Node, func: Callable[[Leaf], Leaf]) -> Node:
     if isinstance(node, str):
         return func(node)
     if isinstance(node, numbers.Real):
+        return func(node)
+    if node is None:
         return func(node)
     if isinstance(node, collections.abc.Mapping):
         return {k: recursive_map(v, func) for k, v in node.items()}
