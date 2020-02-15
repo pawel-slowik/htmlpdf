@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="author" content="{{ name }}" />
+<title>CV - {{ name }}, {{ position }}</title>
+<link rel="stylesheet" href="CV_PL.css" type="text/css" />
+</head>
+<body>
+
+<h1 class="name">{{ name }}</h1>
+
+<table id="personal">
+	<tr>
+		<td>
+			<ul>
+				<li>
+					<span class="label">Telefon:</span>
+					{{ phone }}
+				</li>
+				<li>
+					<span class="label">E-mail:</span>
+					<a href="mailto:{{ email }}">{{ email }}</a>
+				</li>
+				<li>
+					<span class="label">GitHub:</span>
+					<a href="{{ github }}">{{ github }}</a>
+				</li>
+			</ul>
+		</td>
+		<td>
+			<ul>
+				<li>
+					<span class="label">Rok urodzenia:</span>
+					{{ year_of_birth }}
+				</li>
+				<li>
+					<span class="label">Miejsce zamieszkania:</span>
+					{{ place_of_residence }}
+				</li>
+			</ul>
+		</td>
+	</tr>
+</table>
+
+<p class="blurb">{{ blurb }}</p>
+
+<h1>Doświadczenie zawodowe</h1>
+
+<table id="experience">
+{% for job in experience %}
+	<tr>
+		<td>
+			<h2>{{ job.period }}</h2>
+		</td>
+		<td>
+			<h3>{{ job.company }}</h3>
+			<h4>{{ job.position }}</h4>
+			{% if job.notes %}<p>{{ job.notes }}</p>{% endif %}
+			<h5>zakres obowiązków:</h5>
+			<ul>
+			{% for description in job.responsibilities %}
+				<li>{{ description }}</li>
+			{% endfor %}
+			</ul>
+			{% if job.achievements %}
+			<h5>osiągnięcia:</h5>
+			<ul>
+			{% for achievement in job.achievements %}
+				<li>{{ achievement }}</li>
+			{% endfor %}
+			</ul>
+			{% endif %}
+		</td>
+	</tr>
+{% endfor %}
+</table>
+
+<h1>Wykształcenie</h1>
+
+<table id="education">
+{% for school in education %}
+	<tr>
+		<td>
+			<h2>{{ school.period }}</h2>
+		</td>
+		<td>
+			{{ school.description }}
+		</td>
+	</tr>
+{% endfor %}
+</table>
+
+<h1 class="skills">Umiejętności</h1>
+
+<ul>
+{% for category in skills %}
+{% for skill in skills[category] %}
+<li>{{ skill }}</li>
+{% endfor %}
+{% endfor %}
+</ul>
+
+{% if open_source_contributions %}
+<h1 class="open_source_contributions">Wkład w projekty Open Source</h1>
+
+<ul class="open_source_contributions">
+{% for contribution in open_source_contributions %}
+<li><a href="{{ contribution.url}}">{{ contribution.description }}</a></li>
+{% endfor %}
+</ul>
+{% endif %}
+
+<h1 class="foreign_languages">Języki obce</h1>
+
+<ul>
+{% for language in foreign_languages %}
+<li>{{ language.name }} - {{ language.level }}</li>
+{% endfor %}
+</ul>
+
+<h1 class="training">Szkolenia</h1>
+
+<ul>
+{% for course in training %}
+<li>{{ course.description }}{% if course.notes %} ({{ course.notes }}){% endif %}</li>
+{% endfor %}
+</ul>
+
+<h1 class="hobbies">Zainteresowania</h1>
+
+<ul>
+{% for hobby in hobbies %}
+<li>{{ hobby }}</li>
+{% endfor %}
+</ul>
+
+{% if data_processing_clause %}
+<style type="text/css">
+/* WeasyPrint doesn't support @page:last, use @page + @page:first as a workaround. */
+/* This will break if the document is not two pages long. */
+@page {
+	margin-bottom: 2.5cm;
+	padding-bottom: 0.5em;
+	@bottom-left {
+		content: "{{ data_processing_clause }}";
+		border-top: solid 1px lightgrey;
+		vertical-align: top;
+		padding-top: 0.5em;
+		text-align: justify;
+		font-size: x-small;
+	}
+}
+@page:first {
+	margin-bottom: 1cm;
+	padding-bottom: 0;
+	@bottom-left {
+		content: "";
+	}
+}
+</style>
+{% endif %}
+
+</body>
+</html>

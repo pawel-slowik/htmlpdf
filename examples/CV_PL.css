@@ -1,0 +1,87 @@
+@page { margin: 1.5cm 2cm 1cm 2cm; }
+
+* { margin: 0; padding: 0; }
+* { font-family: Calibri; }
+* { font-size: 12pt; }
+h2, h3, h4 { font-size: 14pt; }
+h1 { font-size: 16pt; }
+
+ul { padding-left: 2.5ex; }
+
+td { vertical-align: top; }
+
+h1 { margin: 1em 0 0.5em 0; }
+h5 { font-weight: normal; margin-top: 0.5em; }
+
+table { border-spacing: 0; }
+
+table#experience tr:first-child td,
+table#education tr:first-child td {
+	border-top: solid 1px lightgrey;
+}
+
+table#experience td,
+table#education td {
+	border-bottom: solid 1px lightgrey;
+}
+
+table#experience td,
+table#education td {
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+}
+
+table#experience td:first-child,
+table#education td:first-child {
+	width: 5em;
+}
+
+table#education td {
+	vertical-align: middle;
+}
+
+h1.name {
+	margin-top: 0;
+}
+
+h1.name,
+h1.skills,
+h1.open_source_contributions,
+h1.foreign_languages,
+h1.training,
+h1.hobbies {
+	padding-bottom: 0.5em;
+	border-bottom: solid 1px lightgrey;
+}
+
+table#personal tr td ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none
+}
+
+table#personal {
+	width: 100%;
+	margin-bottom: 1em;
+}
+
+table#personal td:first-child {
+	width: 50%;
+}
+
+table#personal td:first-child span.label {
+	display: inline-block;
+	width: 8ex;
+}
+
+#personal li {
+	line-height: 150%;
+}
+
+ul.open_source_contributions li {
+	line-height: 125%;
+}
+
+p.blurb {
+	text-align: justify;
+}

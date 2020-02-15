@@ -1,0 +1,80 @@
+name: Firstname Lastname
+email: firstname.lastname@example.com
+phone: 000 000 000
+year_of_birth: 2000
+place_of_residence: City
+github: https://example.com/
+position: developer
+blurb: |-
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nibh augue,
+  suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem. Etiam
+  pellentesque aliquet tellus. Phasellus pharetra nulla ac diam. Quisque semper
+  justo at risus. Donec venenatis, turpis vel hendrerit interdum, dui ligula
+  ultricies purus, sed posuere libero dui id orci.
+
+experience:
+  - period: 02.2012 - 09.2019
+    company: Acme Corporation
+    position: developer
+    responsibilities:
+      - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      - Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. Cras vel
+        lorem. Etiam pellentesque aliquet tellus.
+    achievements:
+      - bullet point 1
+      - bullet point 2
+      - bullet point 3
+  - period: 04.2008 - 01.2012
+    company: Yoyodyne, Inc.
+    position: webmaster
+    responsibilities:
+      - bullet point 1
+      - bullet point 2
+      - bullet point 3
+    achievements:
+      - bullet point 1
+      - bullet point 2
+
+education:
+  - period: 10.2004 - 10.2008
+    description: |-
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nibh
+      augue, suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem. Etiam
+      pellentesque aliquet tellus. Phasellus pharetra nulla ac diam.
+
+skills:
+  general: &skills_general
+    - bullet point 1
+    - bullet point 2
+  specific: &skills_specific
+    - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    - Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi.
+    - Cras vel lorem.
+    - Etiam pellentesque aliquet tellus.
+  other: &skills_other
+    - bullet point 1
+    - bullet point 2
+
+open_source_contributions:
+  - description: |-
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi.
+    url: "https://example.com/"
+  - description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    url: "https://example.com/"
+
+foreign_languages:
+  - name: english
+    level: B2
+  - name: russian
+    level: basic
+
+training:
+  - description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    notes: 05.2019
+  - description: Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi.
+    notes: 07.2017
+
+hobbies:
+  - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  - Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi.
