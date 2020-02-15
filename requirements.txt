@@ -1,0 +1,5 @@
+WeasyPrint
+Jinja2
+PyYAML
+Unidecode
+cssselect2
