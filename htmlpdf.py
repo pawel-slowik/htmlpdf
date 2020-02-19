@@ -23,17 +23,20 @@ def create_pdf(html: str, base_url: str, output_filename: str) -> None:
     document = weasyprint.HTML(string=html, base_url=base_url)
     document.write_pdf(target=output_filename, font_config=font_config)
 
-def render_html(data_filenames: Iterable[str], html_template_filename: str) -> str:
+def render_html_files(data_filenames: Iterable[str], html_template_filename: str) -> str:
     """Render a Jinja2 template using YAML files as data sources.
 
     Data from any subsequent YAML file overwrites data loaded from previous
     file(s). You can refer to nodes from previous files using YAML anchors and
     aliases: https://yaml.org/spec/1.2/spec.html#alias// """
-    data = recursive_map(
-        yaml.safe_load("\n".join(open(df, "r").read() for df in data_filenames)),
-        process_tags
+    return render_html(
+        (open(df, "r").read() for df in data_filenames),
+        open(html_template_filename, "r").read()
     )
-    html_template = open(html_template_filename, "r").read()
+
+def render_html(yaml_inputs: Iterable[str], html_template: str) -> str:
+    """Render a Jinja2 template using YAML strings as data sources."""
+    data = recursive_map(yaml.safe_load("\n".join(yaml_inputs)), process_tags)
     return jinja2.Template(html_template).render(data)
 
 def process_tags(inp: Leaf) -> Leaf:
@@ -109,7 +112,7 @@ def main() -> None:
     )
     args = parser.parse_args()
     enable_weasyprint_logging()
-    html = render_html(args.data_filenames, args.html_template_filename)
+    html = render_html_files(args.data_filenames, args.html_template_filename)
     output_filename = (
         args.output_filename
         if args.output_filename
