@@ -36,8 +36,12 @@ def render_html_files(data_filenames: Iterable[str], html_template_filename: str
 
 def render_html(yaml_inputs: Iterable[str], html_template: str) -> str:
     """Render a Jinja2 template using YAML strings as data sources."""
-    data = recursive_map(yaml.safe_load("\n".join(yaml_inputs)), process_tags)
-    return jinja2.Template(html_template).render(data)
+    return jinja2.Template(html_template).render(
+        recursive_map(
+            yaml.safe_load("\n".join(yaml_inputs)),
+            process_tags
+        )
+    )
 
 def process_tags(inp: Leaf) -> Leaf:
     """Process a limited subset of Markdown into HTML."""
