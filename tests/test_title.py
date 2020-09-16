@@ -4,6 +4,7 @@
 
 from htmlpdf import get_title
 
+
 def test_letters() -> None:
     html = """
 <!DOCTYPE html>
