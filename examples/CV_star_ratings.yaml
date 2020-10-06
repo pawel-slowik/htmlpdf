@@ -1,0 +1,37 @@
+skills:
+  - bullet point 1
+  - bullet point 2
+
+technology:
+  - category: backend
+    skills:
+    - label: Foo
+      level: 4
+    - label: Bar
+      level: 5
+    - label: Foo Framework
+      level: 2
+    - label: Baz Framework
+      level: 3
+  - category: databases
+    skills:
+    - label: SQL
+      level: 5
+    - label: NoSQL
+      level: 2
+  - category: frontend
+    skills:
+    - label: Lorem ipsum
+      level: 4
+    - label: dolor sit amet
+      level: 3
+    - label: consectetur adipiscing elit.
+      level: 3
+  - category: other
+    skills:
+    - label: Cras vel lorem
+      level: 4
+    - label: aliquet tellus
+      level: 4
+    - label: aliquet tellus
+      level: 3

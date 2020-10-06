@@ -1,0 +1,64 @@
+h1 {
+	margin: 0.85em 0 0.5em 0;
+}
+
+h1.technology {
+	padding-bottom: 0.5em;
+	border-bottom: solid 1px lightgrey;
+	margin-top: 0;
+	margin-bottom: 1em;
+}
+
+table.technology {
+	width: 100%;
+}
+
+table.technology td.category {
+	padding-bottom: 0.5ex;
+	padding-top: 0.5ex;
+	background-color: #eee;
+	padding-left: 1ex;
+	border-top: solid 1px lightgrey;
+	border-bottom: solid 1px lightgrey;
+}
+
+table.technology td.label,
+table.technology td.level {
+	border-bottom: solid 1px lightgrey;
+	padding-top: 0.5ex;
+	padding-bottom: 0.5ex;
+}
+
+table.technology td.label,
+table.technology td.level {
+	padding-left: 1ex;
+}
+
+table.technology td.level {
+	padding-right: 1ex;
+	text-align: right;
+}
+
+table#technology_columns {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+table#technology_columns td.column {
+	padding: 0;
+	margin: 0;
+	width: 48%;
+}
+
+td.left table:last-child {
+	margin-top: 1.6em;
+}
+
+td.right table:last-child {
+	margin-top: 1.55em;
+}
+
+span.empty_star {
+	color: grey;
+}

@@ -25,3 +25,9 @@ dependencies with:
 Run:
 
 	./htmlpdf.py -i input.yaml -t template.html -o output.pdf
+
+## Examples
+
+	cd examples
+	../htmlpdf.py -i CV_PL.yaml -t CV_PL.html -o CV_PL.pdf
+	../htmlpdf.py -i CV_PL.yaml -i CV_star_ratings.yaml -t CV_star_ratings.html -o CV_star_ratings.pdf

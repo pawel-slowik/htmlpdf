@@ -1,0 +1,73 @@
+{% extends "CV_PL.html" %}
+{% block css %}
+<link rel="stylesheet" href="CV_PL.css" type="text/css" />
+<link rel="stylesheet" href="CV_star_ratings.css" type="text/css" />
+{% endblock %}
+
+{% block skills %}
+
+<h1 class="skills">Umiejętności</h1>
+
+<ul>
+{% for skill in skills %}
+<li>{{ skill }}</li>
+{% endfor %}
+</ul>
+
+<h1 class="technology">Znajomość technologii</h1>
+
+{% macro full_stars(count) -%}
+{% for i in range(count) %}&#9733;{% endfor %}
+{%- endmacro %}
+
+{% macro empty_stars(count) -%}
+<span class="empty_star">{% for i in range(count) %}&#9734;{% endfor %}</span>
+{%- endmacro %}
+
+{% macro stars(count) -%}{{ full_stars(count) }}{{ empty_stars(5 - count) }}{%- endmacro %}
+
+<table id="technology_columns">
+<tr>
+
+<td class="column left">
+
+{% for tech in technology[:2] %}
+<table class="technology">
+<tr>
+<td class="category" colspan="2">{{ tech.category }}</td>
+</tr>
+{% for skill in tech.skills %}
+<tr>
+<td class="label">{{ skill.label }}</td>
+<td class="level">{{ stars(skill.level) }}</td>
+</tr>
+{% endfor %}
+</table>
+{% endfor %}
+
+</td>
+
+<td class="separator"></td>
+
+<td class="column right" align="right">
+
+{% for tech in technology[2:] %}
+<table class="technology">
+<tr>
+<td class="category" colspan="2">{{ tech.category }}</td>
+</tr>
+{% for skill in tech.skills %}
+<tr>
+<td class="label">{{ skill.label }}</td>
+<td class="level">{{ stars(skill.level) }}</td>
+</tr>
+{% endfor %}
+</table>
+{% endfor %}
+
+</td>
+
+</tr>
+</table>
+
+{% endblock %}
