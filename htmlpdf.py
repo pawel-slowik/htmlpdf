@@ -39,7 +39,9 @@ def render_html_files(data_filenames: Iterable[str], html_template_filename: str
 
 def render_html(yaml_inputs: Iterable[str], html_template: str) -> str:
     """Render a Jinja2 template using YAML strings as data sources."""
-    return jinja2.Template(html_template).render(
+    environment = jinja2.Environment(loader=jinja2.FileSystemLoader("."))
+    template = environment.from_string(html_template)
+    return template.render(
         recursive_map(
             yaml.safe_load("\n".join(yaml_inputs)),
             process_tags

@@ -2,6 +2,7 @@
 
 # pylint: disable=missing-docstring
 
+from os import chdir
 from htmlpdf import render_html
 
 
@@ -27,3 +28,10 @@ def test_tags() -> None:
     yaml_inputs = ["foo:\n  _bar_ __baz__"]
     template = "{{foo}}"
     assert render_html(yaml_inputs, template) == "<em>bar</em> <strong>baz</strong>"
+
+
+def test_inheritance() -> None:
+    yaml_inputs = ["foo:\n  bar"]
+    template = "{% extends \"base.html\" %}{% block fooblock %}{{foo}}{% endblock %}"
+    chdir("./tests")
+    assert render_html(yaml_inputs, template) == "base bar"
