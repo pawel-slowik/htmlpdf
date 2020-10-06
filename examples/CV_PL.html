@@ -4,7 +4,9 @@
 <meta charset="utf-8" />
 <meta name="author" content="{{ name }}" />
 <title>CV - {{ name }}, {{ position }}</title>
+{% block css %}
 <link rel="stylesheet" href="CV_PL.css" type="text/css" />
+{% endblock %}
 </head>
 <body>
 
@@ -91,6 +93,8 @@
 {% endfor %}
 </table>
 
+{% block skills %}
+
 <h1 class="skills">Umiejętności</h1>
 
 <ul>
@@ -100,6 +104,8 @@
 {% endfor %}
 {% endfor %}
 </ul>
+
+{% endblock %}
 
 {% if open_source_contributions %}
 <h1 class="open_source_contributions">Wkład w projekty Open Source</h1>
@@ -119,6 +125,7 @@
 {% endfor %}
 </ul>
 
+{% if training %}
 <h1 class="training">Szkolenia</h1>
 
 <ul>
@@ -126,6 +133,7 @@
 <li>{{ course.description }}{% if course.notes %} ({{ course.notes }}){% endif %}</li>
 {% endfor %}
 </ul>
+{% endif %}
 
 <h1 class="hobbies">Zainteresowania</h1>
 

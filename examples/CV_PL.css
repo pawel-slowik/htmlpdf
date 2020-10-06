@@ -8,6 +8,8 @@ h1 { font-size: 16pt; }
 
 ul { padding-left: 2.5ex; }
 
+ul li { line-height: 113%; }
+
 td { vertical-align: top; }
 
 h1 { margin: 1em 0 0.5em 0; }
