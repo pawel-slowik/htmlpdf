@@ -1,7 +1,7 @@
 ![Build Status][build-badge]
 [![Coverage][coverage-badge]][coverage-url]
 
-[build-badge]: https://github.com/pawel-slowik/htmlpdf/workflows/test-on-push/badge.svg
+[build-badge]: https://github.com/pawel-slowik/htmlpdf/workflows/tests/badge.svg
 [coverage-badge]: https://codecov.io/gh/pawel-slowik/htmlpdf/branch/master/graph/badge.svg
 [coverage-url]: https://codecov.io/gh/pawel-slowik/htmlpdf
 
