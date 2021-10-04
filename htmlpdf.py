@@ -20,7 +20,7 @@ Node = Union[Mapping, Iterable, Leaf]
 
 def create_pdf(html: str, base_url: str, output_filename: str) -> None:
     """Create a PDF file from an HTML document."""
-    font_config = weasyprint.fonts.FontConfiguration()
+    font_config = weasyprint.text.fonts.FontConfiguration()
     document = weasyprint.HTML(string=html, base_url=base_url)
     document.write_pdf(target=output_filename, font_config=font_config)
 
@@ -81,8 +81,7 @@ def recursive_map(node: Node, func: Callable[[Leaf], Leaf]) -> Node:
 
 def get_title(html: str) -> str:
     """Extract the meta title from an HTML document."""
-    wrapper = ElementWrapper.from_html_root(ElementTree.fromstring(html))
-    meta: Mapping[str, str] = weasyprint.html.get_html_metadata(wrapper, "")
+    meta: Mapping[str, str] = weasyprint.html.get_html_metadata(weasyprint.HTML(string=html))
     return meta["title"]
 
 
