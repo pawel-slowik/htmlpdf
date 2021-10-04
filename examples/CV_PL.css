@@ -48,6 +48,7 @@ h1.name {
 
 h1.name,
 h1.skills,
+h1.technology,
 h1.open_source_contributions,
 h1.foreign_languages,
 h1.training,
@@ -80,7 +81,12 @@ table#personal td:first-child span.label {
 	line-height: 150%;
 }
 
-ul.open_source_contributions li {
+ul.skills li,
+ul.technologies li,
+ul.open_source_contributions li,
+ul.foreign_languages li,
+ul.training li,
+ul.hobbies li {
 	line-height: 125%;
 }
 

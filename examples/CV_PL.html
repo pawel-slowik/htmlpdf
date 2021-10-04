@@ -78,6 +78,7 @@
 {% endfor %}
 </table>
 
+{% if education %}
 <h1>Wykształcenie</h1>
 
 <table id="education">
@@ -92,12 +93,13 @@
 	</tr>
 {% endfor %}
 </table>
+{% endif %}
 
 {% block skills %}
 
 <h1 class="skills">Umiejętności</h1>
 
-<ul>
+<ul class="skills">
 {% for category in skills %}
 {% for skill in skills[category] %}
 <li>{{ skill }}</li>
@@ -105,6 +107,22 @@
 {% endfor %}
 </ul>
 
+{% endblock %}
+
+{% block technology %}
+{% if technologies %}
+
+<h1 class="technology">Technologie</h1>
+
+<ul class="technologies">
+{% for category in technologies %}
+{% for technology in technologies[category] %}
+<li>{{ technology }}</li>
+{% endfor %}
+{% endfor %}
+</ul>
+
+{% endif %}
 {% endblock %}
 
 {% if open_source_contributions %}
@@ -119,7 +137,7 @@
 
 <h1 class="foreign_languages">Języki obce</h1>
 
-<ul>
+<ul class="foreign_languages">
 {% for language in foreign_languages %}
 <li>{{ language.name }} - {{ language.level }}</li>
 {% endfor %}
@@ -128,7 +146,7 @@
 {% if training %}
 <h1 class="training">Szkolenia</h1>
 
-<ul>
+<ul class="training">
 {% for course in training %}
 <li>{{ course.description }}{% if course.notes %} ({{ course.notes }}){% endif %}</li>
 {% endfor %}
@@ -137,7 +155,7 @@
 
 <h1 class="hobbies">Zainteresowania</h1>
 
-<ul>
+<ul class="hobbies">
 {% for hobby in hobbies %}
 <li>{{ hobby }}</li>
 {% endfor %}
