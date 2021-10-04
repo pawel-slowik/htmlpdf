@@ -6,12 +6,10 @@ import collections.abc
 import os.path
 import logging
 import numbers
-from xml.etree import ElementTree
 from typing import Mapping, Iterable, Callable, Union
 import yaml
 import jinja2
 import weasyprint
-from cssselect2 import ElementWrapper
 from unidecode import unidecode
 
 Leaf = Union[str, numbers.Real, None]
