@@ -132,7 +132,7 @@ def main() -> None:
         else create_output_filename(get_title(html))
     )
     create_pdf(html, get_base_url(args.html_template_filename), output_filename)
-    print("output saved to %s" % output_filename)
+    print(f"output saved to {output_filename}")
 
 
 if __name__ == "__main__":
