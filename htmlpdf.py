@@ -6,6 +6,7 @@ import collections.abc
 import os.path
 import logging
 import numbers
+import argparse
 from typing import Mapping, Iterable, Callable, Union
 import yaml
 import jinja2
@@ -109,7 +110,6 @@ def enable_weasyprint_logging() -> None:
 
 def main() -> None:
     """A simple CLI for the module. Run with `-h` for help."""
-    import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "-i", action="append", dest="data_filenames", required=True,
