@@ -31,8 +31,8 @@ def render_html_files(data_filenames: Iterable[str], html_template_filename: str
     file(s). You can refer to nodes from previous files using YAML anchors and
     aliases: https://yaml.org/spec/1.2/spec.html#alias// """
     return render_html(
-        (open(df, "r").read() for df in data_filenames),
-        open(html_template_filename, "r").read()
+        (open(df, "r", encoding="utf-8").read() for df in data_filenames),
+        open(html_template_filename, "r", encoding="utf-8").read()
     )
 
 
