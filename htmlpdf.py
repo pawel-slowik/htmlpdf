@@ -17,11 +17,12 @@ Leaf = Union[str, numbers.Real, None]
 Node = Union[Mapping, Iterable, Leaf]
 
 
-def create_pdf(html: str, base_url: str, output_filename: str) -> None:
-    """Create a PDF file from an HTML document."""
+def create_pdf(html: str, base_url: str) -> bytes:
+    """Create PDF file contents from an HTML document."""
     font_config = weasyprint.text.fonts.FontConfiguration()
     document = weasyprint.HTML(string=html, base_url=base_url)
-    document.write_pdf(target=output_filename, font_config=font_config)
+    pdf: bytes = document.write_pdf(font_config=font_config)
+    return pdf
 
 
 def render_html_files(data_filenames: Iterable[str], html_template_filename: str) -> str:
@@ -131,7 +132,8 @@ def main() -> None:
         if args.output_filename
         else create_output_filename(get_title(html))
     )
-    create_pdf(html, get_base_url(args.html_template_filename), output_filename)
+    with open(output_filename, "wb") as output_file:
+        output_file.write(create_pdf(html, get_base_url(args.html_template_filename)))
     print(f"output saved to {output_filename}")
 
 
