@@ -19,14 +19,27 @@ dependencies with:
 
 	pip3 install -r requirements.txt
 
+Or use Docker:
+
+	docker-compose build
+
 ## Usage
 
 Run:
 
 	./htmlpdf.py -i input.yaml -t template.html -o output.pdf
 
+With Docker:
+
+	docker-compose run --rm cmd ./htmlpdf.py -i input.yaml -t template.html -o output.pdf
+
 ## Examples
 
 	cd examples
 	../htmlpdf.py -i CV_PL.yaml -t CV_PL.html -o CV_PL.pdf
 	../htmlpdf.py -i CV_PL.yaml -i CV_star_ratings.yaml -t CV_star_ratings.html -o CV_star_ratings.pdf
+
+With Docker:
+
+	docker-compose run --rm example1
+	docker-compose run --rm example2
