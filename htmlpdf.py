@@ -21,7 +21,7 @@ def create_pdf(html: str, base_url: str) -> bytes:
     """Create PDF file contents from an HTML document."""
     font_config = weasyprint.text.fonts.FontConfiguration()
     document = weasyprint.HTML(string=html, base_url=base_url)
-    pdf: bytes = document.write_pdf(font_config=font_config)
+    pdf: bytes = document.write_pdf(font_config=font_config, pdf_version="1.4")
     return pdf
 
 
