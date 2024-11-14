@@ -1,4 +1,4 @@
-WeasyPrint>=59.0
+WeasyPrint>=62.0
 Jinja2
 PyYAML
 Unidecode
