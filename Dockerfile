@@ -4,13 +4,13 @@ WORKDIR /usr/src/app
 
 COPY . .
 
-RUN pip install --no-cache-dir -r requirements.txt
+RUN --mount=type=cache,target=/root/.cache pip install -r requirements.txt
 
 CMD [ "python", "./htmlpdf.py" ]
 
 
 FROM prod AS dev
 
-RUN pip install --no-cache-dir -r requirements-test.txt -r requirements-lint.txt
+RUN --mount=type=cache,target=/root/.cache pip install -r requirements-test.txt -r requirements-lint.txt
 
 CMD ["sh", "-c", "pylint --version && pylint -v . && mypy --version && mypy . && pytest --cov=htmlpdf"]
