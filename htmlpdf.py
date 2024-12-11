@@ -41,15 +41,30 @@ def render_html(yaml_inputs: Iterable[str], html_template: str) -> str:
     """Render a Jinja2 template using YAML strings as data sources."""
     environment = jinja2.Environment(loader=jinja2.FileSystemLoader("."))
     template = environment.from_string(html_template)
-    return template.render(
-        recursive_map(
-            yaml.safe_load("\n".join(yaml_inputs)),
-            process_tags
-        )
-    )
+    return template.render(process_tags(yaml.safe_load("\n".join(yaml_inputs))))
 
 
-def process_tags(inp: Leaf) -> Leaf:
+def process_tags(node: Node) -> Node:
+    """Recursively process a limited subset of Markdown into HTML."""
+
+    def recursive_map(node: Node, func: Callable[[Leaf], Leaf]) -> Node:
+        """Apply a function recursively to a node (similar to map(), but recursive)."""
+        if isinstance(node, str):
+            return func(node)
+        if isinstance(node, numbers.Real):
+            return func(node)
+        if node is None:
+            return func(node)
+        if isinstance(node, collections.abc.Mapping):
+            return {k: recursive_map(v, func) for k, v in node.items()}
+        if isinstance(node, collections.abc.Iterable):
+            return [recursive_map(elem, func) for elem in node]
+        raise ValueError
+
+    return recursive_map(node, process_tags_for_scalar)
+
+
+def process_tags_for_scalar(inp: Leaf) -> Leaf:
     """Process a limited subset of Markdown into HTML."""
     if isinstance(inp, numbers.Real):
         return inp
@@ -62,21 +77,6 @@ def process_tags(inp: Leaf) -> Leaf:
     for pattern, replacement in tags:
         inp = re.sub(pattern, replacement, inp)
     return inp
-
-
-def recursive_map(node: Node, func: Callable[[Leaf], Leaf]) -> Node:
-    """Apply a function recursively to a node (similar to map(), but recursive)."""
-    if isinstance(node, str):
-        return func(node)
-    if isinstance(node, numbers.Real):
-        return func(node)
-    if node is None:
-        return func(node)
-    if isinstance(node, collections.abc.Mapping):
-        return {k: recursive_map(v, func) for k, v in node.items()}
-    if isinstance(node, collections.abc.Iterable):
-        return [recursive_map(elem, func) for elem in node]
-    raise ValueError
 
 
 def get_title(html: str) -> str:
