@@ -1,41 +1,58 @@
 """tests for tag processing"""
 
-# pylint: disable=missing-docstring,line-too-long
+# pylint: disable=missing-docstring
 
 import pytest
-from htmlpdf import Node, process_tags, process_tags_for_scalar
+from htmlpdf import Leaf, Node, process_tags, process_tags_for_scalar
 
 
-def test_no_tags() -> None:
-    assert process_tags_for_scalar("No tags") == "No tags"
-
-
-def test_no_matched_tag() -> None:
-    assert process_tags_for_scalar("no _matched tag") == "no _matched tag"
-
-
-def test_strong_tags() -> None:
-    assert process_tags_for_scalar("__foo__ bar __baz__") == "<strong>foo</strong> bar <strong>baz</strong>"
-
-
-def test_em_tags() -> None:
-    assert process_tags_for_scalar("_foo_ bar _baz_") == "<em>foo</em> bar <em>baz</em>"
-
-
-def test_mixed_tags() -> None:
-    assert process_tags_for_scalar("__foo__ bar _baz_") == "<strong>foo</strong> bar <em>baz</em>"
-
-
-def test_passthrough_none() -> None:
-    assert process_tags_for_scalar(None) is None
-
-
-def test_passthrough_int() -> None:
-    assert process_tags_for_scalar(1) == 1
-
-
-def test_passthrough_float() -> None:
-    assert process_tags_for_scalar(0.1) == 0.1
+@pytest.mark.parametrize(
+    "input_leaf,expected_output",
+    [
+        pytest.param(
+            "No tags",
+            "No tags",
+            id="plain text",
+        ),
+        pytest.param(
+            "no _matched tag",
+            "no _matched tag",
+            id="unmatched tag",
+        ),
+        pytest.param(
+            "__foo__ bar __baz__",
+            "<strong>foo</strong> bar <strong>baz</strong>",
+            id="strong tags",
+        ),
+        pytest.param(
+            "_foo_ bar _baz_",
+            "<em>foo</em> bar <em>baz</em>",
+            id="em tags",
+        ),
+        pytest.param(
+            "__foo__ bar _baz_",
+            "<strong>foo</strong> bar <em>baz</em>",
+            id="mixed tags",
+        ),
+        pytest.param(
+            None,
+            None,
+            id="passthrough None",
+        ),
+        pytest.param(
+            1,
+            1,
+            id="passthrough int",
+        ),
+        pytest.param(
+            0.1,
+            0.1,
+            id="passthrough float",
+        ),
+    ]
+)
+def test_process_tags_for_scalar(input_leaf: Leaf, expected_output: Leaf) -> None:
+    assert process_tags_for_scalar(input_leaf) == expected_output
 
 
 @pytest.mark.parametrize(
