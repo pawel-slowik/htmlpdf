@@ -43,3 +43,9 @@ With Docker:
 
 	docker-compose run --rm example1
 	docker-compose run --rm example2
+
+## Development
+
+Run checks and tests:
+
+    docker-compose run --rm check

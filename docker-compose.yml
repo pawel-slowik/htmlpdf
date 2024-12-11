@@ -3,14 +3,18 @@ version: "3.4"
 services:
 
   cmd:
-    build: .
+    build:
+      context: .
+      target: prod
     image: htmlpdf
     volumes:
       - .:/usr/src/app
       - ~/.fonts:/root/.fonts
 
   example1:
-    build: .
+    build:
+      context: .
+      target: prod
     image: htmlpdf
     volumes:
       - .:/usr/src/app
@@ -19,10 +23,23 @@ services:
     command: ../htmlpdf.py -i CV_PL.yaml -t CV_PL.html -o CV_PL.pdf
 
   example2:
-    build: .
+    build:
+      context: .
+      target: prod
     image: htmlpdf
     volumes:
       - .:/usr/src/app
       - ~/.fonts:/root/.fonts
     working_dir: /usr/src/app/examples
     command: ../htmlpdf.py -i CV_PL.yaml -i CV_star_ratings.yaml -t CV_star_ratings.html -o CV_star_ratings.pdf
+
+  check:
+    profiles:
+      - dev-task # not really a service, don't start by default
+    build:
+      context: .
+      target: dev
+    image: htmlpdf_dev
+    volumes:
+      - .:/usr/src/app
+      - ~/.fonts:/root/.fonts
