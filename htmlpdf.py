@@ -73,6 +73,7 @@ def process_tags_for_scalar(inp: Leaf) -> Leaf:
     tags = [
         (r"__([^_]+)__", r"<strong>\1</strong>"),
         (r"_([^_]+)_", r"<em>\1</em>"),
+        (r"\[([^]]+)\]\(([^)]+)\)", r'<a href="\2">\1</a>'),
     ]
     for pattern, replacement in tags:
         inp = re.sub(pattern, replacement, inp)

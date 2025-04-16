@@ -35,6 +35,11 @@ from htmlpdf import Leaf, Node, process_tags, process_tags_for_scalar
             id="mixed tags",
         ),
         pytest.param(
+            "foo [example ??](https://www.example.com) bar",
+            'foo <a href="https://www.example.com">example ??</a> bar',
+            id="link",
+        ),
+        pytest.param(
             None,
             None,
             id="passthrough None",

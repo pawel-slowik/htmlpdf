@@ -10,7 +10,7 @@ blurb: |-
   suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem. Etiam
   pellentesque aliquet tellus. Phasellus pharetra nulla ac diam. Quisque semper
   justo at risus. Donec venenatis, turpis vel hendrerit interdum, dui ligula
-  ultricies purus, sed posuere libero dui id orci.
+  ultricies purus, [sed posuere libero dui id orci](https://example.com/).
 
 experience:
   - period: 02.2012 - 09.2019
